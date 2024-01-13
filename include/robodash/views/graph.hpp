@@ -6,6 +6,7 @@
 
 #pragma once
 #include "robodash/api.h"
+#include <map>
 
 namespace rd {
 
@@ -16,7 +17,7 @@ namespace rd {
 class Graph {
 	/**
 	 * @defgroup graph Grapher
-	 * @brief A graph plotter for debugging
+	 * @brief A grapher for debugging
 	 * TODO: Add image
 	 *
 	 * TODO: Add description
@@ -27,7 +28,29 @@ class Graph {
 
   public:
 	/// @name Graph functions
-	Graph(std::string name = "Graph");
+	Graph(int min_x, int max_x, int min_y, int max_y, std::string name = "Graph");
+
+	/**
+	 * @brief Add a value to the graph
+	 *
+	 * @param x X value
+	 * @param y Y value
+	 */
+	void insert(int x, int y);
+
+	/**
+	 * @brief Add a value to the graph on a specific series
+	 *
+	 * @param series Series name
+	 * @param x X value
+	 * @param y Y value
+	 */
+	void insert(std::string series, int x, int y);
+
+  private:
+	std::map<std::string, std::pair<double, double>> data;
+
+	void sd_save();
 };
 
 } // namespace rd
