@@ -31,7 +31,14 @@ class Graph {
 	Graph(int min_x, int max_x, int min_y, int max_y, std::string name = "Graph");
 
 	/**
-	 * @brief Add a value to the graph
+	 * @brief Add a Y value to the graph
+	 *
+	 * @param y Y value
+	 */
+	void insert(int y);
+
+	/**
+	 * @brief Add an X and Y value to the graph
 	 *
 	 * @param x X value
 	 * @param y Y value
@@ -39,7 +46,15 @@ class Graph {
 	void insert(int x, int y);
 
 	/**
-	 * @brief Add a value to the graph on a specific series
+	 * @brief Add a Y value to the graph on another series
+	 *
+	 * @param series Series name
+	 * @param y Y value
+	 */
+	void insert(std::string series, int y);
+
+	/**
+	 * @brief Add a value to the graph on another series
 	 *
 	 * @param series Series name
 	 * @param x X value
