@@ -19,8 +19,7 @@ rd::Graph::Graph(std::string name, int update_rate) {
 	lv_obj_set_size(chart, 416, 208);
 
 	// Run background task
-	// FIXME: Correct way to do this?
-	pros::Task task(&rd::Graph::update_task, "Graph updater");
+	pros::Task task([this]() { this->update_task(); }, "Graph updater");
 }
 
 // ================================ Methods ================================ //
