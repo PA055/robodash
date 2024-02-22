@@ -28,42 +28,40 @@ class Graph {
 
   public:
 	/// @name Graph functions
-	Graph(int min_x, int max_x, int min_y, int max_y, std::string name = "Graph");
 
 	/**
-	 * @brief Add a Y value to the graph
+	 * @brief Construct a new Graph
 	 *
-	 * @param y Y value
+	 * @param name Name of the graph
+	 * @param update_rate Rate to update the graph (milliseconds)
 	 */
-	void insert(int y);
+	Graph(std::string name, int update_rate = 100);
 
 	/**
-	 * @brief Add an X and Y value to the graph
+	 * @brief Set a series' color
 	 *
-	 * @param x X value
-	 * @param y Y value
+	 * @param series
+	 * @param color
 	 */
-	void insert(int x, int y);
+	void set_series_color(std::string series, int color);
 
 	/**
-	 * @brief Add a Y value to the graph on another series
+	 * @brief Plot a value on the graph
+	 *
+	 * @param value Value to plot
+	 */
+	void plot(double value);
+
+	/**
+	 * @brief Plot a value on the graph on another series
 	 *
 	 * @param series Series name
-	 * @param y Y value
+	 * @param value Value to plot
 	 */
-	void insert(std::string series, int y);
-
-	/**
-	 * @brief Add a value to the graph on another series
-	 *
-	 * @param series Series name
-	 * @param x X value
-	 * @param y Y value
-	 */
-	void insert(std::string series, int x, int y);
+	void plot(std::string series, double value);
 
   private:
-	std::map<std::string, std::pair<double, double>> data;
+	std::map<std::string, std::vector<double>> data;
 
 	void sd_save();
 };
