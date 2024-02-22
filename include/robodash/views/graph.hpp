@@ -67,8 +67,8 @@ class Graph {
 	std::map<std::string, std::vector<double>> data;
 	std::map<std::string, int> series_colors;
 
-	lv_chart_t *chart;
-	lv_label_t *name_label;
+	lv_obj_t *chart;
+	lv_obj_t *name_label;
 
 	void sd_save();
 	void update_task();
