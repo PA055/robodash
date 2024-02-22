@@ -25,14 +25,25 @@ rd::Graph::Graph(std::string name, int update_rate) {
 
 // ================================ Methods ================================ //
 
-void rd::Graph::set_series_color(std::string series, int color) {
-	series_colors.emplace(series, color);
-}
+void rd::Graph::set_series_color(std::string series, int color) {}
 
 void rd::Graph::plot(double value) { plot("", value); }
 
-void rd::Graph::plot(std::string series, double value) { data[series].push_back(value); }
+void rd::Graph::plot(std::string series, double value) { buffers[series].push_back(value); }
 
 // ============================== Updater Task ============================== //
 
-void rd::Graph::update_task() {}
+void rd::Graph::update_task() {
+	for (auto const &[series_name, values] : buffers) {
+		// Ensure series exists
+		if (series.find(series_name) == series.end()) {
+			// TODO: Automatic series colors
+			series[series_name] =
+			    lv_chart_add_series(chart, lv_color_hex(0xff0000), LV_CHART_AXIS_PRIMARY_Y);
+		}
+
+		lv_chart_series_t *this_series = series[series_name];
+
+		// Plot values
+	}
+}
