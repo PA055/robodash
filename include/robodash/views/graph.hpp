@@ -61,9 +61,17 @@ class Graph {
 	void plot(std::string series, double value);
 
   private:
+	int rate;
+	std::string name;
+
 	std::map<std::string, std::vector<double>> data;
+	std::map<std::string, int> series_colors;
+
+	lv_chart_t *chart;
+	lv_label_t *name_label;
 
 	void sd_save();
+	void update_task();
 };
 
 } // namespace rd
