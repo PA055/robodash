@@ -64,8 +64,8 @@ class Graph {
 	int rate;
 	std::string name;
 
-	std::map<std::string, std::vector<double>> data;
-	std::map<std::string, int> series_colors;
+	std::map<std::string, std::vector<double>> buffers;
+	std::map<std::string, lv_chart_series_t *> series;
 
 	lv_obj_t *chart;
 	lv_obj_t *name_label;
