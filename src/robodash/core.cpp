@@ -46,7 +46,7 @@ void views_btn_cb(lv_event_t *event) {
 	lv_obj_clear_flag(view_menu, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_clear_flag(shade, LV_OBJ_FLAG_HIDDEN);
 
-	if (rd_view_get_anims(current_view) == RD_ANIM_ON) {
+	if (!rd_view_has_flag(current_view, RD_FLAG_NO_ANIMATION)) {
 		lv_anim_start(&anim_sidebar_open);
 		lv_anim_start(&anim_shade_show);
 	}
@@ -59,7 +59,7 @@ void close_cb(lv_event_t *event) {
 
 	lv_obj_add_flag(alert_cont, LV_OBJ_FLAG_HIDDEN);
 
-	if (rd_view_get_anims(current_view) == RD_ANIM_ON) {
+	if (!rd_view_has_flag(current_view, RD_FLAG_NO_ANIMATION)) {
 		lv_anim_start(&anim_sidebar_close);
 		lv_anim_start(&anim_shade_hide);
 	} else {
@@ -73,7 +73,7 @@ void alert_btn_cb(lv_event_t *event) {
 	lv_obj_add_flag(alert_btn, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_clear_flag(alert_cont, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_clear_flag(shade, LV_OBJ_FLAG_HIDDEN);
-	if (rd_view_get_anims(current_view) == RD_ANIM_ON) lv_anim_start(&anim_shade_show);
+	if (!rd_view_has_flag(current_view, RD_FLAG_NO_ANIMATION)) lv_anim_start(&anim_shade_show);
 }
 
 void alert_cb(lv_event_t *event) {
@@ -86,7 +86,7 @@ void alert_cb(lv_event_t *event) {
 	if (lv_obj_get_child_cnt(alert_cont) == 0) {
 		lv_obj_add_flag(alert_cont, LV_OBJ_FLAG_HIDDEN);
 
-		if (rd_view_get_anims(current_view) == RD_ANIM_ON) {
+		if (!rd_view_has_flag(view, RD_FLAG_NO_ANIMATION)) {
 			lv_anim_start(&anim_shade_hide);
 		} else {
 			lv_obj_add_flag(shade, LV_OBJ_FLAG_HIDDEN);
@@ -260,7 +260,6 @@ rd_view_t *rd_view_create(const char *name) {
 	lv_obj_add_event_cb(view->_list_btn, close_cb, LV_EVENT_PRESSED, NULL);
 
 	view->name = name;
-	view->anims = RD_ANIM_ON;
 
 	if (!current_view) rd_view_focus(view);
 
@@ -277,10 +276,6 @@ void rd_view_del(rd_view_t *view) {
 	free(view);
 }
 
-void rd_view_set_anims(rd_view_t *view, rd_anim_state_t state) { view->anims = state; }
-
-rd_anim_state_t rd_view_get_anims(rd_view_t *view) { return view->anims; }
-
 lv_obj_t *rd_view_obj(rd_view_t *view) {
 	if (!valid_view(view)) return NULL;
 
@@ -294,7 +289,7 @@ void rd_view_focus(rd_view_t *view) {
 	current_view = view;
 	lv_obj_clear_flag(current_view->obj, LV_OBJ_FLAG_HIDDEN);
 
-	if (rd_view_get_anims(current_view) == RD_ANIM_ON)
+	if (!rd_view_has_flag(view, RD_FLAG_NO_ANIMATION))
 		lv_obj_add_flag(anim_label, LV_OBJ_FLAG_HIDDEN);
 	else
 		lv_obj_clear_flag(anim_label, LV_OBJ_FLAG_HIDDEN);
@@ -304,7 +299,7 @@ void rd_view_alert(rd_view_t *view, const char *msg) {
 	if (!valid_view(view)) return;
 
 	if (!lv_obj_has_flag(view_menu, LV_OBJ_FLAG_HIDDEN)) {
-		if (rd_view_get_anims(current_view) == RD_ANIM_ON)
+		if (!rd_view_has_flag(view, RD_FLAG_NO_ANIMATION))
 			lv_anim_start(&anim_sidebar_close);
 		else
 			lv_obj_add_flag(view_menu, LV_OBJ_FLAG_HIDDEN);
@@ -312,7 +307,7 @@ void rd_view_alert(rd_view_t *view, const char *msg) {
 
 	if (lv_obj_has_flag(shade, LV_OBJ_FLAG_HIDDEN)) {
 		lv_obj_clear_flag(shade, LV_OBJ_FLAG_HIDDEN);
-		if (rd_view_get_anims(current_view) == RD_ANIM_ON) lv_anim_start(&anim_shade_show);
+		if (!rd_view_has_flag(view, RD_FLAG_NO_ANIMATION)) lv_anim_start(&anim_shade_show);
 	}
 
 	lv_obj_clear_flag(alert_cont, LV_OBJ_FLAG_HIDDEN);
@@ -335,3 +330,9 @@ void rd_view_alert(rd_view_t *view, const char *msg) {
 	lv_label_set_long_mode(alert_msg, LV_LABEL_LONG_WRAP);
 	lv_label_set_text(alert_msg, msg);
 }
+
+void rd_view_add_flag(rd_view_t *view, rd_flag_t flags) { view->flags |= flags; }
+
+void rd_view_remove_flag(rd_view_t *view, rd_flag_t flags) { view->flags &= (~flags); }
+
+bool rd_view_has_flag(rd_view_t *view, rd_flag_t flags) { return (view->flags & flags) == flags; }
