@@ -24,11 +24,28 @@ class View {
 	void focus();
 
 	/**
+	 * @brief Push an alert
+	 *
+	 * Pushes an alert to the screen, regardless of which view is active.
+	 *
+	 * @param msg Message to display
+	 */
+	void alert(std::string msg);
+
+	/**
 	 * @brief Add a flag to the View
 	 *
 	 * @param flag Flag to add
 	 */
 	void add_flag(rd_flag_t flag);
+
+	/**
+	 * @brief Check if the View has a flag
+	 *
+	 * @param flag Flag to check for
+	 * @return boolean
+	 */
+	bool has_flag(rd_flag_t flag);
 
 	/**
 	 * @brief Remove a flag from the View
