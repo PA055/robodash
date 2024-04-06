@@ -27,9 +27,11 @@ extern "C" {
  * @brief View flags
  */
 enum rd_flag {
-	RD_NO_ANIMATION = (1L << 0),
-	RD_HIDDEN = (1L << 1),
+	RD_FLAG_NO_ANIMATION = (1L << 0),
+	RD_FLAG_HIDDEN = (1L << 1),
 };
+
+typedef uint32_t rd_flag_t;
 
 /**
  * @brief Robodash view structure
@@ -38,7 +40,7 @@ typedef struct rd_view {
 	const char *name;
 	lv_obj_t *obj;
 	lv_obj_t *_list_btn;
-	uint32_t flags;
+	rd_flag_t flags;
 } rd_view_t;
 
 /**
@@ -87,14 +89,22 @@ void rd_view_alert(rd_view_t *view, const char *msg);
  * @param view View to modify
  * @param flags Flags to add
  */
-void rd_view_add_flag(rd_view_t *view, uint32_t flags);
+void rd_view_add_flag(rd_view_t *view, rd_flag_t flags);
 
 /**
  * @brief Remove a flag from a view
  * @param view View to modify
  * @param flags Flags to remove
  */
-void rd_view_remove_flag(rd_view_t *view, uint32_t flags);
+void rd_view_remove_flag(rd_view_t *view, rd_flag_t flags);
+
+/**
+ * @brief Check if a view has a flag
+ * @param view View to query
+ * @param flags Flags to check for
+ * @return boolean
+ */
+bool rd_view_has_flag(rd_view_t *view, rd_flag_t flags);
 
 /// @}
 

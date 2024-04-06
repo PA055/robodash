@@ -28,14 +28,14 @@ class View {
 	 *
 	 * @param flag Flag to add
 	 */
-	void add_flag(uint32_t flag);
+	void add_flag(rd_flag_t flag);
 
 	/**
 	 * @brief Remove a flag from the View
 	 *
 	 * @param flag Flag to clear
 	 */
-	void remove_flag(uint32_t flag);
+	void remove_flag(rd_flag_t flag);
 
 	/**
 	 * @brief Get the C view object
