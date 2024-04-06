@@ -24,9 +24,12 @@ extern "C" {
 /// @{
 
 /**
- * @brief Animation state
+ * @brief View flags
  */
-typedef enum rd_anim_state { RD_ANIM_ON, RD_ANIM_OFF } rd_anim_state_t;
+enum rd_flag {
+	RD_NO_ANIMATION = (1L << 0),
+	RD_HIDDEN = (1L << 1),
+};
 
 /**
  * @brief Robodash view structure
@@ -35,7 +38,7 @@ typedef struct rd_view {
 	const char *name;
 	lv_obj_t *obj;
 	lv_obj_t *_list_btn;
-	rd_anim_state_t anims;
+	uint32_t flags;
 } rd_view_t;
 
 /**
@@ -80,20 +83,18 @@ lv_obj_t *rd_view_obj(rd_view_t *view);
 void rd_view_alert(rd_view_t *view, const char *msg);
 
 /**
- * @brief Enable or disable animations for a view
- *
+ * @brief Add a flag to a view
  * @param view View to modify
- * @param state Animation state
+ * @param flags Flags to add
  */
-void rd_view_set_anims(rd_view_t *view, rd_anim_state_t state);
+void rd_view_add_flag(rd_view_t *view, uint32_t flags);
 
 /**
- * @brief Get the animation state for a view
- *
- * @param view View to query
- * @return The animation state
+ * @brief Remove a flag from a view
+ * @param view View to modify
+ * @param flags Flags to remove
  */
-rd_anim_state_t rd_view_get_anims(rd_view_t *view);
+void rd_view_remove_flag(rd_view_t *view, uint32_t flags);
 
 /// @}
 
