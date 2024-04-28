@@ -34,7 +34,7 @@ class Image {
 
 	/// @name Image Functions
   private:
-	rd_view_t *view;
+	rd::View *view;
 
   public:
 	/**

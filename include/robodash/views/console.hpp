@@ -29,7 +29,7 @@ class Console {
 
 	/// @name Console Functions
   private:
-	rd_view_t *view;
+	rd::View *view;
 
 	lv_obj_t *output;
 	lv_obj_t *output_cont;
@@ -69,8 +69,7 @@ class Console {
 	 * @param fmt Format string
 	 * @param args Args for format string
 	 */
-	template <typename... Params>
-	void printf(std::string fmt, Params... args) {
+	template <typename... Params> void printf(std::string fmt, Params... args) {
 		char fstr[sizeof(fmt) + sizeof...(args)];
 		sprintf(fstr, fmt.c_str(), args...);
 		print(fstr);
