@@ -1,9 +1,10 @@
 [submodule "docs/doxygen-awesome-css"]
 	path = docs/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
-[submodule "lv_drivers"]
-	path = ./simulator/lv_drivers
+[submodule "simulator/lv_drivers"]
+	path = simulator/lv_drivers
 	url = https://github.com/lvgl/lv_drivers.git
-[submodule "lvgl"]
-	path = ./simulator/lvgl
+[submodule "simulator/lvgl"]
+	path = simulator/lvgl
 	url = https://github.com/lvgl/lvgl.git
+	branch = release/v8.3
