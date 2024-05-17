@@ -5,8 +5,7 @@
     Used for opening images, but write is supported too
 */
 
-#include "apix.h"
-#include "liblvgl/lvgl.h"
+#include "robodash/apix.h"
 #include <stdio.h>
 
 // ========================= Function Declarations ========================= //

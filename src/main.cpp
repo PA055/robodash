@@ -1,5 +1,9 @@
-#include "main.h"
+// #include "main.h"
 #include "robodash/api.h"
+
+#ifdef SIMULATOR
+#include "../simulator/init.h"
+#endif
 
 // ============================= Example autons ============================= //
 
@@ -42,3 +46,27 @@ void opcontrol() {
 		pros::delay(200);
 	}
 }
+
+// ========================== Simulator Entrypoint ========================== //
+
+#ifdef SIMULATOR
+int main(int argc, char **argv) {
+	(void)argc;
+	(void)argv;
+
+	/*Initialize LVGL*/
+	lv_init();
+
+	/*Initialize the HAL (display, input devices, tick) for LVGL*/
+	hal_init();
+
+	while (1) {
+		/* Periodically call the lv_task handler.
+		 * It could be done in a timer interrupt or an OS task too.*/
+		lv_timer_handler();
+		usleep(5 * 1000);
+	}
+
+	return 0;
+}
+#endif

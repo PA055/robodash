@@ -4,11 +4,7 @@
  * Opts: 
  ******************************************************************************/
 
-#ifdef LV_LVGL_H_INCLUDE_SIMPLE
-#include "lvgl.h"
-#else
-#include "liblvgl/lvgl.h"
-#endif
+#include "robodash/api.h"
 
 #ifndef SOURCE_CODE_PRO_16
 #define SOURCE_CODE_PRO_16 1

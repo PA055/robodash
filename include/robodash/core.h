@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "liblvgl/lvgl.h"
+#include "robodash/api.h"
 
 #ifdef __cplusplus
 extern "C" {

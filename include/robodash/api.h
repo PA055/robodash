@@ -12,7 +12,13 @@
 #define RD_VERSION_MINOR 2
 #define RD_VERSION_PATCH 0
 
+#ifdef SIMULATOR
+#include "../simulator/pros_stubs.h"
+#include "lvgl.h"
+#else
+#include "../api.h"
 #include "liblvgl/lvgl.h"
+#endif
 
 // ========================== Check Compatibility ========================== //
 
