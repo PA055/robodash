@@ -18,3 +18,4 @@ temp.errors
 
 docs-output/
 .DS_Store
+build/

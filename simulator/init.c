@@ -1,4 +1,3 @@
-
 /**
  * @file main
  *
@@ -13,84 +12,16 @@
 #define SDL_MAIN_HANDLED /*To fix SDL's "undefined reference to WinMain"                           \
                             issue*/
 #include "lv_drivers/sdl/sdl.h"
-#include "lvgl/lvgl.h"
+#include "lvgl.h"
 #include <SDL2/SDL.h>
 
-/*********************
- *      DEFINES
- *********************/
-
-/**********************
- *      TYPEDEFS
- **********************/
-
-/**********************
- *  STATIC PROTOTYPES
- **********************/
-static void hal_init(void);
 static int tick_thread(void *data);
-
-/**********************
- *  STATIC VARIABLES
- **********************/
-
-/**********************
- *      MACROS
- **********************/
-
-/**********************
- *   GLOBAL FUNCTIONS
- **********************/
-
-/*********************
- *      DEFINES
- *********************/
-
-/**********************
- *      TYPEDEFS
- **********************/
-
-/**********************
- *      VARIABLES
- **********************/
-
-/**********************
- *  STATIC PROTOTYPES
- **********************/
-
-/**********************
- *   GLOBAL FUNCTIONS
- **********************/
-
-int main(int argc, char **argv) {
-	(void)argc; /*Unused*/
-	(void)argv; /*Unused*/
-
-	/*Initialize LVGL*/
-	lv_init();
-
-	/*Initialize the HAL (display, input devices, tick) for LVGL*/
-	hal_init();
-
-	while (1) {
-		/* Periodically call the lv_task handler.
-		 * It could be done in a timer interrupt or an OS task too.*/
-		lv_timer_handler();
-		usleep(5 * 1000);
-	}
-
-	return 0;
-}
-
-/**********************
- *   STATIC FUNCTIONS
- **********************/
 
 /**
  * Initialize the Hardware Abstraction Layer (HAL) for the LVGL graphics
  * library
  */
-static void hal_init(void) {
+void hal_init(void) {
 	/* Use the 'monitor' driver which creates window on PC's monitor to simulate a
 	 * display*/
 	sdl_init();
