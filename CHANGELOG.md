@@ -11,6 +11,10 @@ based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - A C++ wrapper class for the view API
 - An LVGL-style flag system for views
 
+## 2.1.1
+
+Robodash 2.1.1 is a recompilation of 2.1.0 that upgrades to PROS version 4.1.0
+
 ## 2.1.0
 
 Robodash 2.1.0 resolves issues with the autonomous selector.
